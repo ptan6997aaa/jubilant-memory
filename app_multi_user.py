@@ -420,7 +420,8 @@ class Dashboard:
 
     # ── UI 构建：声明式创建界面并绑定事件 ─────────────────────────────────────────
     def build(self):
-        # 添加自定义 CSS 样式
+        # 添加自定义 CSS 样式 
+        # Text color reference https://primeflex.org/textcolor
         ui.add_head_html('''
             <style>
                 /* 渐变紫卡：用于 KPI */
@@ -451,15 +452,35 @@ class Dashboard:
                 ui.label('Weighted Avg').classes('kpi-title')
                 self.kpi_weighted = ui.label('0.00%').classes('kpi-value')
             # 通过率
-            with ui.card():
-                ui.label('Pass Rate').classes('text-green-600 font-medium')
+            with ui.card().classes('card-purple'):
+                ui.label('Pass Rate').classes('kpi-title')
                 self.kpi_pass = ui.label('0.00%').classes(
-                    'text-green-600 text-3xl font-bold')
+                    'kpi-value')
             # 满分率
-            with ui.card():
-                ui.label('Perfect Scores').classes('text-blue-600 font-medium')
+            with ui.card().classes('card-purple'):
+                ui.label('Perfect Scores').classes('kpi-title')
                 self.kpi_perfect = ui.label('0.0%').classes(
-                    'text-blue-600 text-3xl font-bold')
+                    'kpi-value')
+
+        # with ui.grid(columns=4).classes('w-full gap-4 mb-6'):
+        #     # 平均分
+        #     with ui.card().classes('text-teal-600 font-medium'):
+        #         ui.label('Average Score').classes('kpi-title')
+        #         self.kpi_avg = ui.label('0.00').classes('text-teal-600 text-3xl font-bold')
+        #     # 加权平均
+        #     with ui.card().classes('text-orange-600 font-medium'):
+        #         ui.label('Weighted Avg').classes('kpi-title')
+        #         self.kpi_weighted = ui.label('0.00%').classes('text-orange-600 text-3xl font-bold')
+        #     # 通过率
+        #     with ui.card():
+        #         ui.label('Pass Rate').classes('text-green-600 font-medium')
+        #         self.kpi_pass = ui.label('0.00%').classes(
+        #             'text-green-600 text-3xl font-bold')
+        #     # 满分率
+        #     with ui.card():
+        #         ui.label('Perfect Scores').classes('text-blue-600 font-medium')
+        #         self.kpi_perfect = ui.label('0.0%').classes(
+        #             'text-blue-600 text-3xl font-bold')
 
         # ── 第一行图表：成绩 + 年级（2 列）────────────────────────────────────────
         with ui.grid(columns=2).classes('w-full gap-6 mb-6'):
